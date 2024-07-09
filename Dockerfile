@@ -1,6 +1,6 @@
 # Container for running Vivado on M1/M2 macs
 # though it should work equally on Intel macs
-FROM --platform=linux/amd64 ubuntu
+FROM --platform=linux/amd64 ubuntu:jammy
 RUN apt update && apt upgrade -y
 
 # install gui
