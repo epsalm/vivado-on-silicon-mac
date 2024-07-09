@@ -3,6 +3,7 @@
 DOCKER_IMAGE=vivado-x64
 LOGO_IMG_FALLBACK="$HOME/.tools/vivado-on-silicon-mac/vivado_logo.png"
 VIVADO_APP="Vivado.app"
+INSTALLER_BIN=$(find Xilinx*.bin)
 
 # echo with color
 function f_echo {
@@ -50,12 +51,11 @@ f_echo "Building Docker image"
 docker build --platform=linux/amd64 -t $DOCKER_IMAGE .
 
 # Copy Vivado installation file into $script_dir
-installation_binary=""
-while ! [[ $installation_binary == *.bin ]]; do
+while ! [[ $INSTALLER_BIN == *.bin ]]; do
 	f_echo "Drag and drop the installation binary into this terminal window and press Enter: "
-	read installation_binary
+	read INSTALLER_BIN
 done
-cp $installation_binary $script_dir
+cp $INSTALLER_BIN $script_dir
 
 # Running install script in docker container
 f_echo "Launching Docker container and installation script"
